@@ -66,13 +66,45 @@ const scheletroPagina = (() => {
         align-items: center;
         gap: 1.5rem;
         padding: 2rem;
+        background-color: yellow;
     }
     
     .secondaParteMain {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem;;
+        padding: 1rem;
+        font-size: clamp(14px,3vw,4rem);
+    }
+
+    .terzaParteMain {
+        padding: 10px;
+    }
+
+    .boxOra {
+        display: flex;
+        align-items: center;
+        column-gap: 1rem;
+        padding: 1rem;
+        border: black solid 1px;
+        margin-bottom: 10px;
+        font-size: clamp(14px,3vw,4rem);
+    }
+
+    .boxOra {
+        justify-content: space-between; /* 100% della larghezza in modalità mobile */
+    }
+
+
+
+    @media (max-width: 768px) {
+        .boxOra {
+          justify-content: space-between; /* 100% della larghezza in modalità mobile */
+        }
+
+        .boxOra > span , .boxOra > img {
+            flex: 1;
+        }
     }
     
     .contenitoreUno, .contenitoreDue, .contenitoreTre {
@@ -80,6 +112,7 @@ const scheletroPagina = (() => {
         flex-direction: column;
         align-items: center;
         flex: 1;
+        cursor: pointer;
     }
 
     </style>
@@ -91,38 +124,42 @@ const scheletroPagina = (() => {
                 <button id="cambioGradi"></button>
             </div>
         </div>
-        <div class="secondaParteNav">
-            <input type="text" name="citySearch" id="SearchBox">
+        <form class="secondaParteNav">
+            <input type="text" name="citySearch" id="searchBox">
             <button id="searchBtn"></button>
-        </div>
+        </form>
     </nav>
 
     <div class="mainContainer">
 
         <div class="primaParteMain">
-            <div class="Nomepaese">Meteo 'citta'</div>
-            <div class="giorno">Oggi</div>
+            <div class="nomePaese"></div>
+            <div class="giorno"></div>
         </div>
 
         <div class="secondaParteMain">
-            <div class="contenitoreUno">
-                <span class="oggi">Oggi</span>
-                <span class="dataOggi">06</span>
-            </div>
-            <div class="contenitoreDue">
-                <span class="domani">Domani</span>
-                <img src="iconaMeteoGiornaliero" alt="" srcset="">
+            <div class="contenitoreUno" id='box1'>
+                <span class="oggi"></span>
+                <img src='' alt="" id='iconaOggi'>
                 <div class="gradi">
-                    <span class="gradiMin">14°</span>
-                    <span class="gradiMax">21°</span>
+                    <span class="gradiMin" id='gradiMinOggi'></span>
+                    <span class="gradiMax" id='gradiMaxOggi'></span>
                 </div>
             </div>
-            <div class="contenitoreTre">
-                <span class="dopoDomani">mer 08</span>
-                <img src="iconaMeteoGiornaliero" alt="" srcset="">
+            <div class="contenitoreDue" id='box2'>
+                <span class="domani"></span>
+                <img src='' alt="" id='iconaDomani'>
                 <div class="gradi">
-                    <span class="gradiMin">9°</span>
-                    <span class="gradiMax">17°</span>
+                    <span class="gradiMin" id='gradiMinDomani'></span>
+                    <span class="gradiMax" id='gradiMaxDomani'></span>
+                </div>
+            </div>
+            <div class="contenitoreTre" id='box3'>
+                <span class="dopoDomani"></span>
+                <img src="" alt="" id='iconaDopoDomani'>
+                <div class="gradi">
+                    <span class="gradiMin" id='gradiMinDopoDomani'></span>
+                    <span class="gradiMax" id='gradiMaxDopoDomani'></span>
                 </div>
             </div>
         </div>
