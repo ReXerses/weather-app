@@ -22,9 +22,9 @@ const UI = (() => {
         nomeCittà.textContent = `Previsioni meteo ${città.location.name}`;
         giorno.textContent =  `${utils.getDayName(città.forecast.forecastday[idGiorno].date)}  ${utils.giorniFuturi(idGiorno)}`;
 
-        dataOggi.textContent = `Oggi ${utils.getDayName(città.forecast.forecastday[0].date)}  ${utils.giorniFuturi(idGiorno)}`;
-        dataDomani.textContent = `Domani ${utils.getDayName(città.forecast.forecastday[1].date)}  ${utils.giorniFuturi(idGiorno)}`;
-        dataDopoDomani.textContent = `${utils.getDayName(città.forecast.forecastday[2].date)}  ${utils.giorniFuturi(idGiorno)}`;
+        dataOggi.textContent = `Oggi ${utils.getDayName(città.forecast.forecastday[0].date)}  ${utils.giorniFuturi(0)}`;
+        dataDomani.textContent = `Domani ${utils.getDayName(città.forecast.forecastday[1].date)}  ${utils.giorniFuturi(1)}`;
+        dataDopoDomani.textContent = `${utils.getDayName(città.forecast.forecastday[2].date)}  ${utils.giorniFuturi(2)}`;
         
         iconaOggi.src = `https:`+città.forecast.forecastday[0].day.condition.icon;
         iconaOggi.alt = città.forecast.forecastday[0].day.condition.text;
@@ -67,29 +67,45 @@ const UI = (() => {
 
     function creazioneBoxPrevisione (città, idGiorno, idOra) {
         const box = document.createElement('div');
-        box.classList.add('boxOra');
+        box.classList.add('boxPrevisioneOraria');
 
+        const boxOrario = document.createElement('div');
+        boxOrario.classList.add('boxOrario');
         const orario = document.createElement('span');
         orario.textContent = `${idOra < 10 ? '0' + idOra : idOra}:00`;
-        box.appendChild(orario);
+        boxOrario.appendChild(orario);
+        box.appendChild(boxOrario);
 
+        const boxIcona = document.createElement('div');
+        boxIcona.classList.add('boxIcona');
         const icona = document.createElement('img');
         icona.src = `https:`+città.forecast.forecastday[idGiorno].hour[idOra].condition.icon;
-        box.appendChild(icona);
+        boxIcona.appendChild(icona);
+        box.appendChild(boxIcona);
 
+        const boxCondizione = document.createElement('div');
+        boxCondizione.classList.add('boxCondizione');
         const condizione = document.createElement('span');
         condizione.textContent= città.forecast.forecastday[idGiorno].hour[idOra].condition.text;
-        box.appendChild(condizione);
+        boxCondizione.appendChild(condizione);
+        box.appendChild(boxCondizione);
 
+        const boxTempMedia = document.createElement('div');
+        boxTempMedia.classList.add('boxTempMedia');
         const tempMedia = document.createElement('span');
         tempMedia.textContent = ` ${città.forecast.forecastday[idGiorno].hour[idOra].temp_c}°`;
-        box.appendChild(tempMedia);
+        tempMedia.classList.add('tempMedia');
+        boxTempMedia.appendChild(tempMedia);
+        box.appendChild(boxTempMedia);
+        //Aggiunta animazione per una sola volta
+        box.classList.add('animateFromLeft');
+        box.addEventListener('animationend', () => {
+            box.classList.remove('animateFromLeft');
+        });
 
         return box;
 
     }
-
-
 
     return {
         aggiornamentoPagina
