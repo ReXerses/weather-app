@@ -61,7 +61,7 @@ boxDomani.addEventListener('click' , async () => {
     boxDopoDomani.classList.remove('giornoSelezionato');
     boxDomani.classList.toggle('giornoSelezionato');
     cambioGradi.classList.remove('fahre');
-        cambioGradi.classList.add('celsius');
+    cambioGradi.classList.add('celsius');
     let previsioni = await meteo.tempo(città);
     UI.aggiornamentoPagina(previsioni,1);
 })
